@@ -1,0 +1,48 @@
+<div class="w-full mx-auto mt-12 px-8">
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-semibold text-gray-800">Ajouter un contact</h2>
+    </div>
+
+    <div class="relative">
+      <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103 10.5a7.5 7.5 0 0013.15 6.15z" />
+        </svg>
+      </span>
+      <input
+        [(ngModel)]="searchQuery"
+        (input)="searchUsers()"
+        type="text"
+        placeholder="Rechercher un utilisateur..."
+        class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <!-- Résultats -->
+    <div class="mt-8" *ngIf="results.length > 0">
+      <ul class="divide-y divide-gray-200">
+        <li *ngFor="let user of results" class="flex justify-between items-center py-3">
+          <span class="text-gray-800">{{ user.username }}</span>
+          <button
+            class="text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded"
+            (click)="sendFriendRequest(user.id)"
+          >
+            Ajouter
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Message par défaut -->
+    <div class="mt-8 text-center text-gray-400" *ngIf="results.length === 0 && !loading && !searchQuery">
+      <p class="text-sm">Tapez un nom pour rechercher des utilisateurs.</p>
+    </div>
+
+    <!-- Chargement -->
+    <div *ngIf="loading" class="text-center mt-6 text-blue-400">
+      <p>Recherche en cours...</p>
+    </div>
+  </div>
+</div>

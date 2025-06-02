@@ -1,0 +1,44 @@
+<div class="w-full mx-auto mt-12 px-8">
+
+  <div class="bg-white rounded-lg shadow p-6">
+    <!-- Titre -->
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Liste des invitations</h2>
+
+    <!-- Message vide -->
+    <div *ngIf="requests.length === 0" class="text-center text-gray-400 py-6">
+      <p class="text-sm">Aucune invitation reçue.</p>
+    </div>
+
+    <!-- Liste des demandes -->
+    <div *ngFor="let request of requests" class="flex items-center justify-between gap-4 py-4 border-b last:border-b-0 hover:bg-gray-50 transition">
+      <!-- Infos utilisateur -->
+      <div class="flex-1">
+        <h4 class="font-medium text-gray-800">{{ request.from_username }}</h4>
+        <p class="text-sm text-gray-500">Vous a envoyé une demande d’ami</p>
+      </div>
+
+      <!-- Boutons -->
+      <div class="flex gap-2">
+        <button
+          class="flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1.5 rounded-full shadow-sm transition"
+          (click)="respond(request.from_user_id, 'accept')"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+          Accepter
+        </button>
+
+        <button
+          class="flex items-center gap-1 bg-red-500 hover:bg-red-600 text-white text-sm px-3 py-1.5 rounded-full shadow-sm transition"
+          (click)="respond(request.from_user_id, 'reject')"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Refuser
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

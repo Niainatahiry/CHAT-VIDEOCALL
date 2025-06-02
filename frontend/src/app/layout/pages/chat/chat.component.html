@@ -1,0 +1,46 @@
+<div class="p-4 h-screen flex flex-col">
+  <!-- Zone des messages -->
+  <div class="flex-1 overflow-y-auto space-y-2 mb-4">
+    <div *ngFor="let msg of messages">
+      <div
+        [ngClass]="{
+          'items-end text-right': msg.user.id === currentUserId,
+          'items-start text-left': msg.user.id !== currentUserId
+        }"
+        class="flex flex-col p-2"
+      >
+        <!-- Nom de l'utilisateur -->
+        <span class="text-xs font-medium text-gray-500 mb-1">
+          {{ msg.user.username }}
+        </span>
+
+        <!-- Message -->
+        <div
+          [ngClass]="{
+            'bg-blue-500 text-white': msg.user.id === currentUserId,
+            'bg-gray-100 text-gray-800': msg.user.id !== currentUserId
+          }"
+          class="inline-block rounded px-4 py-2 max-w-xs"
+        >
+          {{ msg.text }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zone d'envoi -->
+  <div class="flex">
+    <input
+      [(ngModel)]="newMessage"
+      type="text"
+      placeholder="Écris ton message..."
+      class="flex-1 border border-gray-300 rounded px-4 py-2"
+    />
+    <button
+      (click)="sendMessage()"
+      class="ml-2 px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      Envoyer
+    </button>
+  </div>
+</div>

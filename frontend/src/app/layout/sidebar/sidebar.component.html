@@ -1,0 +1,97 @@
+<nav class="bg-white h-full border-r border-gray-200 relative">
+  <!-- Titre + Barre de recherche -->
+  <div class="px-4 py-5 border-b border-gray-200">
+    <h2 class="text-xl font-semibold text-gray-800">Discussions</h2>
+
+    <div class="relative mt-4">
+      <span class="absolute inset-y-0 left-3 flex items-center text-gray-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 103 10.5a7.5 7.5 0 0013.15 6.15z" />
+        </svg>
+      </span>
+      <input
+        type="text"
+        placeholder="Rechercher..."
+        class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+    </div>
+
+    <!-- Bouton Voir les demandes d'amis -->
+    <div routerLink="/friendrequest" class="mt-4 hover:bg-gray-100 cursor-pointer flex items-center gap-4 p-4 rounded-md relative">
+      <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 relative">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87M16 7a4 4 0 11-8 0 4 4 0 018 0zM20 8a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <!-- Badge notification -->
+        <span class="absolute -left-2 top-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+          3
+        </span>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="text-sm font-medium text-gray-900">Voir les demandes</h3>
+        <p class="text-sm text-blue-500">Gérer vos invitations</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Liste des messages -->
+  <li
+  *ngFor="let friend of friends"
+  class="p-4 cursor-pointer flex items-center gap-4 rounded-md transition-colors"
+  [routerLink]="['/chat', friend.id]"
+  routerLinkActive="bg-gray-300 text-gray-900"
+  [routerLinkActiveOptions]="{ exact: true }"
+  [ngClass]="{
+    'hover:bg-gray-200': !isActive(friend.id),
+    'bg-gray-300 text-gray-900': isActive(friend.id)
+  }"
+>
+  <img
+    [src]="'https://i.pravatar.cc/40?u=' + friend.id"
+    alt="Profile"
+    class="w-12 h-12 rounded-full object-cover"
+  />
+  <div class="flex-1 min-w-0">
+    <h3 class="text-sm font-medium truncate" [class.text-gray-900]="isActive(friend.id)" [class.text-gray-700]="!isActive(friend.id)">
+      {{ friend.username || ('User ' + friend.id) }}
+    </h3>
+  </div>
+</li>
+
+
+
+    <!-- Bouton Ajouter un contact -->
+    <li routerLink="/usersearch" class="p-4 hover:bg-gray-100 cursor-pointer flex items-center gap-4 text-blue-600">
+      <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 4v16m8-8H4" />
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="text-sm font-medium">Ajouter un contact</h3>
+        <p class="text-sm text-blue-400">Commencer une nouvelle discussion</p>
+      </div>
+    </li>
+
+  <!-- Bouton Logout -->
+  <div class="absolute bottom-5 w-full px-4">
+    <button
+      class="w-full flex items-center justify-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full shadow-lg hover:bg-red-600 transition"
+      (click)="logout()"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-9V5" />
+      </svg>
+      Logout
+    </button>
+  </div>
+</nav>

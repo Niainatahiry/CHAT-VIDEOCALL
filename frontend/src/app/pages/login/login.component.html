@@ -1,0 +1,20 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+  <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+    <h2 class="text-3xl font-extrabold text-center text-green-600 mb-6">
+      Connexion
+    </h2>
+
+    <form (ngSubmit)="login()" class="flex flex-col gap-4 p-6 max-w-sm mx-auto">
+      <input [(ngModel)]="userId" name="userId" placeholder="Nom d'utilisateur" class="border p-2 rounded" />
+      <input [(ngModel)]="password" name="password" type="password" placeholder="Mot de passe" class="border p-2 rounded" />
+
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Se connecter</button>
+    </form>
+    <p class="mt-6 text-center text-sm text-gray-600">
+      Pas encore de compte ?
+      <a routerLink="/register" class="font-medium text-green-600 hover:text-green-500">
+        Inscrivez-vous
+      </a>
+    </p>
+  </div>
+</div>

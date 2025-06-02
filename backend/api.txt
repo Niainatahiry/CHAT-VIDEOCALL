@@ -1,0 +1,2 @@
+const apiKey = 'a7rxgmr3anmx';
+const apiSecret = '85vr548cu5q7rv4pe3btczhx9eyrw6nzcwznmrqv336tmvb2xn7vum8meer865kz';
